@@ -26,7 +26,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        Connect();
     }
     #endregion
 
@@ -44,7 +43,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    // PUNのコールバック
     #region MonoBehaviourPunCallbacks Callbacks
     public override void OnConnectedToMaster()
     {
