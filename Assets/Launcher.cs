@@ -14,6 +14,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     #region Private Fields
     string gameVersion = "1";
+
+    [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+    [SerializeField]
+    private GameObject controlPanel;
+    [Tooltip("The UI Label to inform the user that the connection is in progress")]
+    [SerializeField]
+    private GameObject progressLabel;
     #endregion
 
     #region MonoBehaviour CallBacks
@@ -26,12 +33,17 @@ public class Launcher : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        progressLabel.SetActive(false);
+        controlPanel.SetActive(true);
     }
     #endregion
 
     #region Public Methods
     public void Connect()
     {
+        progressLabel.SetActive(true);
+        controlPanel.SetActive(false);
+
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinRandomRoom();
@@ -52,6 +64,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        progressLabel.SetActive(false);
+        controlPanel.SetActive(true);
+
         Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
