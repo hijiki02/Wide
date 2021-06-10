@@ -15,7 +15,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     #region Private Fields
     string gameVersion = "1";
 
-    [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+    [Tooltip("The UI Panel to let the user enter name, connect and play")]
     [SerializeField]
     private GameObject controlPanel;
     [Tooltip("The UI Label to inform the user that the connection is in progress")]
@@ -46,7 +46,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsConnected)
         {
-            PhotonNetwork.JoinRandomRoom();
+            //PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.ConnectUsingSettings();
         } else
         {
             PhotonNetwork.GameVersion = gameVersion;
@@ -59,8 +60,14 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+        PhotonNetwork.JoinLobby();
     }
 
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("ロビーに入りました。");
+        PhotonNetwork.JoinRandomRoom();
+    }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -79,6 +86,16 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            Debug.Log("We load the 'Room for 1' ");
+
+
+            // #Critical
+            // Load the Room Level.
+            PhotonNetwork.LoadLevel("Classroom");
+        }
     }
     #endregion
 }
