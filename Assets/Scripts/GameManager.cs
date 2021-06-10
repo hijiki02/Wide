@@ -9,6 +9,12 @@ using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     #region Photon Callbacks
+    public override void OnLeftRoom()
+    {
+        Debug.Log("シーンを移動します");
+        SceneManager.LoadScene(0);
+    }
+
     public override void OnPlayerEnteredRoom(Player other)
     {
         Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
@@ -42,6 +48,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     #region Public Methods
     public void LeaveRoom()
     {
+        Debug.Log("ルームを退室します");
         PhotonNetwork.LeaveRoom();
     }
 
