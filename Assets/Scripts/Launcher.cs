@@ -23,8 +23,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     private GameObject progressLabel;
     #endregion
 
-    #region MonoBehaviour CallBacks
-
+    #region Unityのコールバック
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -38,7 +37,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    #region Public Methods
+    #region パブリック関数
     public void Connect()
     {
         progressLabel.SetActive(true);
@@ -46,20 +45,21 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsConnected)
         {
-            //PhotonNetwork.JoinRandomRoom();
-            PhotonNetwork.ConnectUsingSettings();
+            //接続してない場合
+            Debug.Log("It is not connected to the Photon Network.");
         } else
         {
+            //接続している場合
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
     }
     #endregion
 
-    #region MonoBehaviourPunCallbacks Callbacks
+    #region PUNのコールバック
     public override void OnConnectedToMaster()
     {
-        Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+        Debug.Log("マスターに接続されました。");
         PhotonNetwork.JoinLobby();
     }
 
@@ -69,33 +69,23 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
     }
 
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("ルームに入りました。");
+        PhotonNetwork.LoadLevel("Classroom");
+    }
+
     public override void OnDisconnected(DisconnectCause cause)
     {
+        Debug.LogWarningFormat("切断されました。理由: {0}", cause);
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
-
-        Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+        Debug.Log("ランダム入室に失敗しました。ルームが存在しない可能性があります。");
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-    }
-
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-        {
-            Debug.Log("We load the 'Room for 1' ");
-
-
-            // #Critical
-            // Load the Room Level.
-            PhotonNetwork.LoadLevel("Classroom");
-        }
     }
     #endregion
 }
