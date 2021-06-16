@@ -8,58 +8,38 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    #region Photon Callbacks
-    public override void OnLeftRoom()
-    {
-        Debug.Log("シーンを移動します");
-        SceneManager.LoadScene(0);
-    }
-
-    public override void OnPlayerEnteredRoom(Player other)
-    {
-        Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName); // not seen if you're the player connecting
-
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
-
-            LoadArena();
-        }
-    }
-
-    public override void OnPlayerLeftRoom(Player other)
-    {
-        Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
-
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
-
-
-            LoadArena();
-        }
-    }
-    #endregion
-
-
-    #region Public Methods
+    #region パブリック関数
     public void LeaveRoom()
     {
-        Debug.Log("ルームを退室します");
+        Debug.Log("ルームから出ます。");
         PhotonNetwork.LeaveRoom();
     }
 
     void LoadArena()
     {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-        }
-        Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
+        Debug.LogFormat("レベルの読み込みを開始します。プレイヤー数: {0}人", PhotonNetwork.CurrentRoom.PlayerCount);
+        if (!PhotonNetwork.IsMasterClient)　Debug.LogError("マスタークライアントでないにもかかわらず、レベルを読み込もうとしています。");
         PhotonNetwork.LoadLevel("Classroom");
+    }
+    #endregion
+
+    #region Photonのコールバック
+    public override void OnLeftRoom()
+    {
+        Debug.Log("退室しました。");
+        SceneManager.LoadScene(0);
+    }
+
+    public override void OnPlayerEnteredRoom(Player other)
+    {
+        Debug.LogFormat("{0}が入室しました。", other.NickName);
+        if (PhotonNetwork.IsMasterClient)　LoadArena();
+    }
+
+    public override void OnPlayerLeftRoom(Player other)
+    {
+        Debug.LogFormat("{0}が退室しました。", other.NickName);
+        if (PhotonNetwork.IsMasterClient)　LoadArena();
     }
     #endregion
 }
