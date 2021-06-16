@@ -40,16 +40,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     #region パブリック関数
     public void Connect()
     {
+        Debug.Log("Photon Networkへの接続を開始します。");
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
 
         if (PhotonNetwork.IsConnected)
         {
-            //接続してない場合
-            Debug.Log("It is not connected to the Photon Network.");
+            Debug.Log("Photon Networkに接続されていません。");
         } else
         {
-            //接続している場合
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
