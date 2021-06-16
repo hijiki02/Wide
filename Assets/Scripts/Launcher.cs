@@ -6,19 +6,12 @@ using Photon.Realtime;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-    #region Private Serialiable Fields
-    [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-    [SerializeField]
-    private byte maxPlayersPerRoom = 4;
-    #endregion
-
-    #region Private Fields
-    string gameVersion = "1";
-
-    [Tooltip("The UI Panel to let the user enter name, connect and play")]
+    #region プライベートフィールド
+    [Tooltip("入力フォーム")]
     [SerializeField]
     private GameObject controlPanel;
-    [Tooltip("The UI Label to inform the user that the connection is in progress")]
+
+    [Tooltip("進捗ラベル")]
     [SerializeField]
     private GameObject progressLabel;
     #endregion
@@ -26,10 +19,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     #region Unityのコールバック
     void Awake()
     {
+        Debug.LogFormat("ゲームのバージョン: {0}", WholeSettings.gameVersion);
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         progressLabel.SetActive(false);
@@ -46,10 +39,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsConnected)
         {
-            Debug.Log("Photon Networkに接続されていません。");
+            Debug.Log("Photon Networkに接続できません。");
         } else
         {
-            PhotonNetwork.GameVersion = gameVersion;
+            PhotonNetwork.GameVersion = WholeSettings.gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -83,8 +76,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("ランダム入室に失敗しました。ルームが存在しない可能性があります。");
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        Debug.Log("ランダム入室に失敗しました。ルームが存在していない可能性があります。");
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = WholeSettings.maxPlayersPerRoom });
     }
     #endregion
 }
