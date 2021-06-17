@@ -46,19 +46,29 @@ public class Launcher : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
         }
     }
+
+    public void EnterRoom()
+    {
+        Debug.Log("ランダム入室を開始します。");
+        progressLabel.SetActive(true);
+        controlPanel.SetActive(false);
+        PhotonNetwork.JoinRandomRoom();
+    }
     #endregion
 
     #region PUNのコールバック
     public override void OnConnectedToMaster()
     {
         Debug.Log("マスターに接続されました。");
+        progressLabel.SetActive(false);
+        controlPanel.SetActive(true);
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
         Debug.Log("ロビーに入りました。");
-        PhotonNetwork.JoinRandomRoom();
+        //PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinedRoom()
