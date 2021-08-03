@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Voice.Unity;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
+    #region 変数
+    private Recorder recorder;
+    #endregion
+
     #region プライベートフィールド
+    [Tooltip("Recorderを含むGameObject")]
+    [SerializeField]
+    private GameObject recorderObject;
+
     [Tooltip("入力フォーム")]
     [SerializeField]
     private GameObject controlPanel;
@@ -19,18 +28,36 @@ public class Launcher : MonoBehaviourPunCallbacks
     #region Unityのコールバック
     void Awake()
     {
-        Debug.LogFormat("ゲームのバージョン: {0}", WholeSettings.gameVersion);
+        Debug.LogFormat("ゲームのバージョン: {0}", WholeSettings.GameVersion);
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     void Start()
     {
+        recorder = recorderObject.GetComponent<Recorder>();
+        SetMicrophoneDevice();
+
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
     }
     #endregion
 
     #region パブリック関数
+    public void SetMicrophoneDevice()
+    {
+        Debug.Log("マイクの取得を開始します。");
+        var enumerator = recorder.MicrophonesEnumerator;
+
+        if (enumerator.IsSupported)
+        {
+            var devices = enumerator.Devices.GetEnumerator();
+            devices.MoveNext();
+
+            Debug.LogFormat("マイクを取得しました。デバイス: {0}", devices.Current);
+            recorder.MicrophoneDevice = devices.Current;
+        }
+    }
+
     public void Connect()
     {
         Debug.Log("Photon Networkへの接続を開始します。");
@@ -42,7 +69,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             Debug.Log("Photon Networkに接続できません。");
         } else
         {
-            PhotonNetwork.GameVersion = WholeSettings.gameVersion;
+            PhotonNetwork.GameVersion = WholeSettings.GameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -68,12 +95,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("ロビーに入りました。");
-        //PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("ルームに入りました。");
+        Debug.Log("入室しました。");
         PhotonNetwork.LoadLevel("Classroom");
     }
 
@@ -87,7 +113,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("ランダム入室に失敗しました。ルームが存在していない可能性があります。");
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = WholeSettings.maxPlayersPerRoom });
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = WholeSettings.MaxPlayersPerRoom });
     }
     #endregion
 }

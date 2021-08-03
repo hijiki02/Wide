@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppSettings:
     AppIdRealtime: c3e2ee1a-7663-4492-ae67-3229d7059165
+    AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: a3573f64-012a-4f25-9215-4fbcf97e1daf
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -26,18 +27,21 @@ MonoBehaviour:
     EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
-    NetworkLogging: 2
-  DevRegion: jp
+    NetworkLogging: 1
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - CantHearYou
+  - ChangeColour
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship
   - Fire
+  - HeresWhy
   - RespawnSpaceship
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0

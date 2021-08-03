@@ -8,10 +8,19 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    #region Unityのコールバック
+    private void Start()
+    {
+        Debug.Log("アバターの生成を開始します。");
+        Vector3 position = new Vector3(Random.Range(-90f, 90f), 0.25f, Random.Range(-90f, 90f));
+        PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+    }
+    #endregion
+
     #region パブリック関数
     public void LeaveRoom()
     {
-        Debug.Log("ルームから出ます。");
+        Debug.Log("退室を開始します。");
         PhotonNetwork.LeaveRoom();
     }
 
@@ -19,7 +28,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.LogFormat("レベルの読み込みを開始します。プレイヤー数: {0}人", PhotonNetwork.CurrentRoom.PlayerCount);
         if (!PhotonNetwork.IsMasterClient)　Debug.LogError("マスタークライアントでないにもかかわらず、レベルを読み込もうとしています。");
-        PhotonNetwork.LoadLevel("Classroom");
     }
     #endregion
 
