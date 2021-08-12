@@ -2,7 +2,7 @@
 public struct WholeSettings
 {
     //ゲームのバージョン
-    public static string GameVersion { get; } = "0.08a";
+    public static string GameVersion { get; } = "0.09a";
 
     //部屋毎の最大プレイヤー数
     public static byte MaxPlayersPerRoom { get; } = 4;
