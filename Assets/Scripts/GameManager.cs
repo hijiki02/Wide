@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    #region パブリック関数
+    #region 関数
     public void LeaveRoom()
     {
         Debug.Log("退室を開始します。");

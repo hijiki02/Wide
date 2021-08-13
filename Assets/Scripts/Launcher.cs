@@ -42,7 +42,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    #region パブリック関数
+    #region 関数
     public void SetMicrophoneDevice()
     {
         Debug.Log("マイクの取得を開始します。");

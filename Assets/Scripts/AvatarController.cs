@@ -1,30 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
 using UnityEngine;
-
-using Photon.Pun;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class AvatarController : MonoBehaviourPunCallbacks
 {
+    #region 変数
+    private Rigidbody rb;
+    private GameObject camObject;
     private Camera cam;
-    private Vector3 camOffset;
+    private float h, v;
+    #endregion
 
-    // Start is called before the first frame update
-    void Start()
+    #region プライベートフィールド
+    [Tooltip("カメラの距離")]
+    [SerializeField]
+    private float camOffset;
+
+    [Tooltip("移動速度")]
+    [SerializeField]
+    private float speed = 25f;
+
+    [Tooltip("回転速度")]
+    [SerializeField]
+    private float movingTurnSpeed = 100;
+    #endregion
+
+    #region Unityのコールバック
+    private void Start()
     {
-        cam = Camera.main;
-        camOffset = new Vector3(0f, 12.5f, 0f);
+        rb = GetComponent<Rigidbody>();
+        camObject = GameObject.Find("PlayerCamera");
+        cam = camObject.GetComponent<Camera>();
+
+        cam.transform.position += camOffset * transform.forward;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (photonView.IsMine)
         {
-            Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-            transform.Translate(15f * Time.deltaTime * input.normalized);
+            h = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+            v = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
-            cam.transform.position = transform.position + camOffset;
+            rb.velocity = v * speed * transform.forward;
+            transform.rotation *= Quaternion.AngleAxis(movingTurnSpeed * h * Time.deltaTime, Vector3.up);
         }
     }
+    #endregion
 }
