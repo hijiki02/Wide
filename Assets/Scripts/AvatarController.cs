@@ -5,16 +5,15 @@ using UnityStandardAssets.CrossPlatformInput;
 public class AvatarController : MonoBehaviourPunCallbacks
 {
     #region 変数
-    private Rigidbody rb;
-    private GameObject camObject;
     private Camera cam;
+    private Rigidbody rb;
     private float h, v;
     #endregion
 
     #region プライベートフィールド
     [Tooltip("カメラの距離")]
     [SerializeField]
-    private float camOffset;
+    private Vector3 camOffset = new Vector3(0f, 12.5f, 12.5f);
 
     [Tooltip("移動速度")]
     [SerializeField]
@@ -28,11 +27,15 @@ public class AvatarController : MonoBehaviourPunCallbacks
     #region Unityのコールバック
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        camObject = GameObject.Find("PlayerCamera");
-        cam = camObject.GetComponent<Camera>();
+        if (photonView.IsMine)
+        {
+            GameObject camObject = transform.Find("Camera").gameObject;
+            cam = camObject.GetComponent<Camera>();
+            rb = GetComponent<Rigidbody>();
 
-        cam.transform.position += camOffset * transform.forward;
+            // TODO: Avatarとカメラの距離をユーザーが設定できるようにする
+            //cam.transform.position = camOffset;
+        }
     }
 
     private void Update()
