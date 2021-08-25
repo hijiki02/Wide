@@ -30,6 +30,8 @@ public class AvatarController : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             GameObject camObject = transform.Find("Camera").gameObject;
+            camObject.SetActive(true);
+
             cam = camObject.GetComponent<Camera>();
             rb = GetComponent<Rigidbody>();
 
