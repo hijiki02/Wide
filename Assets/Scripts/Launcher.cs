@@ -46,8 +46,27 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    #region 関数
-    public void SetMicrophoneDevice()
+    #region パブリック関数
+    public void EnterRoom()
+    {
+        Debug.Log("ランダム入室を開始します。");
+        progressLabel.SetActive(true);
+        controlPanel.SetActive(false);
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void Exit()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_STANDALONE
+            UnityEngine.Application.Quit();
+        #endif
+    }
+    #endregion
+
+#region 関数
+    private void SetMicrophoneDevice()
     {
         Debug.Log("マイクの取得を開始します。");
         Recorder recorder = recorderObject.GetComponent<Recorder>();
@@ -64,7 +83,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
 
-    public void Connect()
+    private void Connect()
     {
         Debug.Log("Photon Networkへの接続を開始します。");
 
@@ -77,17 +96,9 @@ public class Launcher : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
         }
     }
+#endregion
 
-    public void EnterRoom()
-    {
-        Debug.Log("ランダム入室を開始します。");
-        progressLabel.SetActive(true);
-        controlPanel.SetActive(false);
-        PhotonNetwork.JoinRandomRoom();
-    }
-    #endregion
-
-    #region PUNのコールバック
+#region PUNのコールバック
     public override void OnConnectedToMaster()
     {
         Debug.Log("マスターに接続されました。");
@@ -120,5 +131,5 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("ランダム入室に失敗しました。ルームが存在していない可能性があります。");
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = WholeSettings.MaxPlayersPerRoom });
     }
-    #endregion
+#endregion
 }
