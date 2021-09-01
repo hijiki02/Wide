@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1af924189f5a4872b3a42cf5dd00a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 100, y: 0, z: 0}
+  trip: {x: 100, y: 0, z: 0}
   duration: 1
   delayLevel: 1
 --- !u!1 &211201489
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1af924189f5a4872b3a42cf5dd00a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 100, y: 0, z: 0}
+  trip: {x: 100, y: 0, z: 0}
   duration: 1
   delayLevel: 2
 --- !u!1 &1836928916
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1af924189f5a4872b3a42cf5dd00a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 100, y: 0, z: 0}
+  trip: {x: 100, y: 0, z: 0}
   duration: 1
   delayLevel: 0
 --- !u!1 &1852366155
