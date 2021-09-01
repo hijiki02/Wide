@@ -7,14 +7,14 @@ using Photon.Voice.Unity;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-    #region 変数
-    private Recorder recorder;
-    #endregion
-
     #region プライベートフィールド
     [Tooltip("Recorderを含むGameObject")]
     [SerializeField]
     private GameObject recorderObject;
+
+    [Tooltip("接続ステータス")]
+    [SerializeField]
+    private GameObject label;
 
     [Tooltip("入力フォーム")]
     [SerializeField]
@@ -34,11 +34,15 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        recorder = recorderObject.GetComponent<Recorder>();
-        SetMicrophoneDevice();
-
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
+
+        if (!WholeSettings.isConnectedToPhotonNetwork)
+        {
+            SetMicrophoneDevice();
+            Connect();
+            WholeSettings.isConnectedToPhotonNetwork = true;
+        }
     }
     #endregion
 
@@ -46,6 +50,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void SetMicrophoneDevice()
     {
         Debug.Log("マイクの取得を開始します。");
+        Recorder recorder = recorderObject.GetComponent<Recorder>();
+
         var enumerator = recorder.MicrophonesEnumerator;
 
         if (enumerator.IsSupported)
@@ -61,12 +67,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void Connect()
     {
         Debug.Log("Photon Networkへの接続を開始します。");
-        progressLabel.SetActive(true);
-        controlPanel.SetActive(false);
 
         if (PhotonNetwork.IsConnected)
         {
-            Debug.Log("Photon Networkに接続できません。");
+            Debug.Log("すでにPhoton Networkと接続しています。");
         } else
         {
             PhotonNetwork.GameVersion = WholeSettings.GameVersion;
@@ -95,6 +99,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("ロビーに入りました。");
+        label.SetActive(false);
     }
 
     public override void OnJoinedRoom()

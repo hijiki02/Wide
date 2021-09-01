@@ -12,4 +12,7 @@ public struct WholeSettings
 
     //アニメーションの遅延
     public static float AnimationDelay { get; } = 0.25f;
+
+    //Photon Networkに接続済みかどうか
+    public static Boolean isConnectedToPhotonNetwork { get; set; } = false;
 }
