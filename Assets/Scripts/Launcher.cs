@@ -65,7 +65,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     #endregion
 
-#region 関数
+    #region 関数
     private void SetMicrophoneDevice()
     {
         Debug.Log("マイクの取得を開始します。");
@@ -96,9 +96,9 @@ public class Launcher : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
         }
     }
-#endregion
+    #endregion
 
-#region PUNのコールバック
+    #region PUNのコールバック
     public override void OnConnectedToMaster()
     {
         Debug.Log("マスターに接続されました。");
@@ -131,5 +131,5 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("ランダム入室に失敗しました。ルームが存在していない可能性があります。");
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = WholeSettings.MaxPlayersPerRoom });
     }
-#endregion
+    #endregion
 }
