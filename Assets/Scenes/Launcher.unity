@@ -342,7 +342,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Connecting...
+  m_Text: Hold on...
 --- !u!222 &211201492
 CanvasRenderer:
   m_ObjectHideFlags: 0

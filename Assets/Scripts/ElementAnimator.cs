@@ -8,7 +8,7 @@ using System;
 public class ElementAnimator : MonoBehaviour
 {
     #region プライベートフィールド
-    [Tooltip("移動する座標量")]
+    [Tooltip("移動する座標の量")]
     [SerializeField]
     private Vector3 trip = new Vector3(0f, 0f, 0f);
 
