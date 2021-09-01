@@ -19,6 +19,10 @@ public class ElementAnimator : MonoBehaviour
     [Tooltip("遅延レベル")]
     [SerializeField]
     private float delayLevel = 0f;
+
+    [Tooltip("フェードアニメーションを有効化するか否か")]
+    [SerializeField]
+    private bool doFadeAnimation = true;
     #endregion
 
     #region 変数
@@ -35,22 +39,26 @@ public class ElementAnimator : MonoBehaviour
         delay = delayLevel * WholeSettings.AnimationDelay;
 
         transform.position = initialPosition - trip;
-        image.color = new Func<Color>(() =>
-        {
-            Color color = image.color;
-            color.a = 0f;
-            return color;
-        })();
 
         transform
             .DOMove(transform.position + trip, duration)
             .SetEase(Ease.OutCubic)
             .SetDelay(delay);
 
-        image
-            .DOFade(1f, duration)
-            .SetEase(Ease.OutCubic)
-            .SetDelay(delay);
+        if (doFadeAnimation)
+        {
+            image.color = new Func<Color>(() =>
+            {
+                Color color = image.color;
+                color.a = 0f;
+                return color;
+            })();
+
+            image
+                .DOFade(1f, duration)
+                .SetEase(Ease.OutCubic)
+                .SetDelay(delay);
+        }
     }
     #endregion
 }

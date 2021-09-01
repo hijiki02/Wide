@@ -335,14 +335,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -375,6 +375,7 @@ MonoBehaviour:
   trip: {x: 0, y: -100, z: 0}
   duration: 1
   delayLevel: 0
+  doFadeAnimation: 0
 --- !u!1 &866768254
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963059669212616537, guid: e7bf20e57db2e44f389d6c00946e0d5a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 59.7968
       objectReference: {fileID: 0}
     - target: {fileID: 6963059669212616537, guid: e7bf20e57db2e44f389d6c00946e0d5a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -648,7 +649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6963059669212616537, guid: e7bf20e57db2e44f389d6c00946e0d5a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -441.1016
       objectReference: {fileID: 0}
     - target: {fileID: 6963059669212616537, guid: e7bf20e57db2e44f389d6c00946e0d5a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -665,6 +666,10 @@ PrefabInstance:
     - target: {fileID: 6963059669212616537, guid: e7bf20e57db2e44f389d6c00946e0d5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621879302694252897, guid: e7bf20e57db2e44f389d6c00946e0d5a, type: 3}
+      propertyPath: m_Text
+      value: Leave
       objectReference: {fileID: 0}
     - target: {fileID: 7998059624438644688, guid: e7bf20e57db2e44f389d6c00946e0d5a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
