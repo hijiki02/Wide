@@ -43,11 +43,12 @@ public class ElementAnimator : MonoBehaviour
         })();
 
         transform
-            .DOMove(initialPosition + trip, duration)
+            .DOMove(transform.position + trip, duration)
             .SetEase(Ease.OutCubic)
             .SetDelay(delay);
 
-        image.DOFade(1f, duration)
+        image
+            .DOFade(1f, duration)
             .SetEase(Ease.OutCubic)
             .SetDelay(delay);
     }
