@@ -9,4 +9,7 @@ public struct WholeSettings
 
     //フォントサイズ
     public static int FontSize { get; set; } = 14;
+
+    //アニメーションの遅延
+    public static float AnimationDelay { get; } = 0.25f;
 }
