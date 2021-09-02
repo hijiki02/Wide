@@ -5,7 +5,7 @@ public struct WholeSettings
     public static string GameVersion { get; } = "0.21a";
 
     //部屋毎の最大プレイヤー数
-    public static byte MaxPlayersPerRoom { get; } = 4;
+    public static byte MaxPlayersPerRoom { get; } = 20;
 
     //フォントサイズ
     public static int FontSize { get; set; } = 14;
