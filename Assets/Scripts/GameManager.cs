@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using Photon.Pun;
@@ -8,12 +9,19 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    #region プライベートフィット
+    [SerializeField]
+    private GameObject roomIdObject;
+    #endregion
+
     #region Unityのコールバック
     private void Start()
     {
         Debug.Log("アバターの生成を開始します。");
         Vector3 position = new Vector3(Random.Range(-90f, 90f), 0.25f, Random.Range(-90f, 90f));
         PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+
+        roomIdObject.GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name;
     }
     #endregion
 
