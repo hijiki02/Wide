@@ -58,10 +58,14 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void EnterRoom()
     {
-        Debug.Log("ランダム入室を開始します。");
+        Debug.Log("入室を開始します。");
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
-        PhotonNetwork.JoinRandomRoom();
+
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.IsVisible = false;
+        roomOptions.MaxPlayers = WholeSettings.MaxPlayersPerRoom;
+        PhotonNetwork.JoinOrCreateRoom(roomID, roomOptions, TypedLobby.Default);
     }
 
     public void Exit()
@@ -133,12 +137,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.LogWarningFormat("切断されました。理由: {0}", cause);
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
-    }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.Log("ランダム入室に失敗しました。ルームが存在していない可能性があります。");
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = WholeSettings.MaxPlayersPerRoom });
     }
     #endregion
 }
