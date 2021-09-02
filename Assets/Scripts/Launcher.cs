@@ -26,7 +26,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     #endregion
 
     #region 変数
-    private string roomID;
+    private string roomID = "Default Room";
     #endregion
 
     #region Unityのコールバック
@@ -53,7 +53,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     #region パブリック関数
     public void SetRoomID(string value)
     {
-        roomID = value;
+        if (string.IsNullOrEmpty(value))
+        {
+            Debug.LogError("エラー: ルームIDが入力されていません。");
+            return;
+        }
+        else
+        {
+            roomID = value;
+        }
     }
 
     public void EnterRoom()
