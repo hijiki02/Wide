@@ -25,6 +25,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     private GameObject progressLabel;
     #endregion
 
+    #region 変数
+    private string roomID;
+    #endregion
+
     #region Unityのコールバック
     void Awake()
     {
@@ -47,6 +51,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     #endregion
 
     #region パブリック関数
+    public void SetRoomID(string value)
+    {
+        roomID = value;
+    }
+
     public void EnterRoom()
     {
         Debug.Log("ランダム入室を開始します。");
