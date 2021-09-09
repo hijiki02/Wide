@@ -74,6 +74,9 @@ crashlytics-build.properties
 /[Aa]ssets/[Pp]lugins/*
 /[Aa]ssets/[Pp]hoton/*
 
+/[Aa]ssets/[Pp]lugins.meta
+/[Aa]ssets/[Pp]hoton.meta
+
 #########
 # macOS #
 #########
