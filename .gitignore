@@ -75,6 +75,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Pp]lugins/*
 /[Aa]ssets/[Pp]hoton/*
 
+/[Aa]ssets/[Ff]ree.meta
 /[Aa]ssets/[Pp]lugins.meta
 /[Aa]ssets/[Pp]hoton.meta
 
