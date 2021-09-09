@@ -13,7 +13,7 @@ public class NamePlateScript : MonoBehaviourPunCallbacks
         }
         else
         {
-            GetComponent<TextMesh>().text = PhotonNetwork.NickName;
+            GetComponent<TextMesh>().text = photonView.Owner.NickName;
         }
 
     }
