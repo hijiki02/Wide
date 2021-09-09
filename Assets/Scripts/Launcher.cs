@@ -20,6 +20,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject controlPanel;
 
+    [Tooltip("設定パネル")]
+    [SerializeField]
+    private GameObject settingsPanel;
+
     [Tooltip("進捗ラベル")]
     [SerializeField]
     private GameObject progressLabel;
@@ -74,6 +78,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = false;
         roomOptions.MaxPlayers = WholeSettings.MaxPlayersPerRoom;
         PhotonNetwork.JoinOrCreateRoom(roomID, roomOptions, TypedLobby.Default);
+    }
+
+    public void Settings(bool isActive)
+    {
+        if (isActive) settingsPanel.SetActive(true);
+        else settingsPanel.SetActive(false);
     }
 
     public void Exit()
