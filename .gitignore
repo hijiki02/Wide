@@ -71,6 +71,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Assets
+/[Aa]ssets/[Ff]ree/*
 /[Aa]ssets/[Pp]lugins/*
 /[Aa]ssets/[Pp]hoton/*
 
