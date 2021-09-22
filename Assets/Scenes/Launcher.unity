@@ -1323,11 +1323,12 @@ GameObject:
   m_Component:
   - component: {fileID: 879329194}
   - component: {fileID: 879329199}
+  - component: {fileID: 879329195}
   - component: {fileID: 879329198}
   - component: {fileID: 879329197}
   - component: {fileID: 879329196}
   m_Layer: 5
-  m_Name: Name InputField
+  m_Name: InputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,6 +1355,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &879329195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879329193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ee4d51464d943cbae2adf4c5a8e8e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PrefKey: AnimationDelay
 --- !u!114 &879329196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,7 +1424,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 879329195}
+        m_TargetAssemblyTypeName: SettingInputField, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
