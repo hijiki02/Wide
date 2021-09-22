@@ -37,17 +37,9 @@ public class ElementAnimator : MonoBehaviour
         initialPosition = transform.position;
         image = GetComponent<Image>();
         delay = delayLevel * float.Parse(
-            new Func<string>(() =>
-            {
-                if (PlayerPrefs.HasKey("AnimationDelay"))
-                {
-                    return PlayerPrefs.GetString("AnimationDelay");
-                }
-                else
-                {
-                    return "0";
-                }
-            })()
+            PlayerPrefs.HasKey("AnimationDelay")
+                ? PlayerPrefs.GetString("AnimationDelay")
+                : "0"
         );
 
         transform.position = initialPosition - trip;
