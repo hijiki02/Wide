@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Voice.Unity;
+using System;
+using NCMB;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -44,6 +46,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
+
+        InitPlayerID();
 
         if (!WholeSettings.isConnectedToPhotonNetwork)
         {
@@ -97,6 +101,19 @@ public class Launcher : MonoBehaviourPunCallbacks
     #endregion
 
     #region 関数
+    private void InitPlayerID()
+    {
+        if (string.IsNullOrEmpty(PlayerPrefs.GetString("userID")))
+        {
+            NCMBObject userClass = new NCMBObject("Users");
+            string guid = Guid.NewGuid().ToString();
+
+            PlayerPrefs.SetString("userID", guid);
+            userClass["userID"] = guid;
+            userClass.SaveAsync();
+        }
+    }
+
     private void SetMicrophoneDevice()
     {
         Debug.Log("マイクの取得を開始します。");
