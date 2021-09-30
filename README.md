@@ -6,5 +6,7 @@ Install the following assets into the clone of this project:
 - [Photon Voice 2](https://assetstore.unity.com/packages/tools/audio/photon-voice-2-130518?locale=ja-JP)
 - [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)
 - [Wooden Floor Materials](https://assetstore.unity.com/packages/2d/textures-materials/wood/wooden-floor-materials-150564)
+- [Unity Standalone File Browser](https://github.com/gkngkc/UnityStandaloneFileBrowser)
+- [ニフクラ mobile backend Unity SDK](https://github.com/NIFCLOUD-mbaas/ncmb_unity)
 
 *Please do not change the package folders from default.*
