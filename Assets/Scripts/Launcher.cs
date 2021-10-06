@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Voice.Unity;
 using System;
 using NCMB;
+using SFB;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -88,6 +90,20 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if (isActive) settingsPanel.SetActive(true);
         else settingsPanel.SetActive(false);
+    }
+
+    public void UploadIcon()
+    {
+        StandaloneFileBrowser.OpenFilePanelAsync("Open File", "", "", false, (string[] paths) => {
+            foreach (string path in paths)
+            {
+                Image image = Image.FromFile(path);
+                byte[] imageByte = (byte[])new ImageConverter().ConvertTo(image, typeof(byte[]));
+
+                NCMBFile file = new NCMBFile(PlayerPrefs.GetString("userID"), imageByte);
+                file.SaveAsync();
+            }
+        });
     }
 
     public void Exit()
