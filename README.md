@@ -13,5 +13,3 @@ Install the following assets into the clone of this project:
 
 *Please do not change the package folders from default.*
 
-### Plugins
-- Copy System.Drawing.dll to "Assets/Plugins/".
