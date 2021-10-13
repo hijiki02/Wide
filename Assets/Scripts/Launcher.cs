@@ -125,7 +125,9 @@ public class Launcher : MonoBehaviourPunCallbacks
             string guid = Guid.NewGuid().ToString();
 
             PlayerPrefs.SetString("userID", guid);
+            PhotonNetwork.NickName = guid;
             userClass["userID"] = guid;
+
             userClass.SaveAsync();
         }
     }

@@ -6,49 +6,57 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
+using NCMB;
+
 [RequireComponent(typeof(InputField))]
 public class PlayerNameInputField : MonoBehaviour
 {
-    #region Private Constants
-    const string playerNamePrefKey = "PlayerName";
-    #endregion
+    NCMBObject userClass;
+    string userID;
 
     #region MonoBehaviour CallBacks
-    // Start is called before the first frame update
     void Start()
     {
-        string defaultName = string.Empty;
-        InputField _inputField = this.GetComponent<InputField>();
-        if (_inputField != null)
+        if (PlayerPrefs.HasKey("userID"))
         {
-            if (PlayerPrefs.HasKey(playerNamePrefKey))
+            userClass = new NCMBObject("Users");
+            userID = PlayerPrefs.GetString("userID");
+
+            NCMBQuery<NCMBObject> query = new NCMBQuery<NCMBObject>("Users");
+            query.WhereEqualTo("userID", userID);
+            query.FindAsync((List<NCMBObject> objList, NCMBException e) => {
+                if (e == null)
+                {
+                    foreach (NCMBObject obj in objList)
+                    {
+                        Debug.Log("objectId:" + obj.ObjectId);
+                        userClass.ObjectId = obj.ObjectId;
+                    }
+
+                    userClass.FetchAsync();
+                }
+            });
+
+            InputField inputField = this.GetComponent<InputField>();
+
+            if (inputField != null)
             {
-                defaultName = PlayerPrefs.GetString(playerNamePrefKey);
-                _inputField.text = defaultName;
+                inputField.text = (string)userClass["friendlyName"];
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     #endregion
 
     #region Public Methods
-    public void SetPlayerName(string value)
+    public void SetFriendlyName(string value)
     {
-        // #Important
-        if (string.IsNullOrEmpty(value))
+        if (!string.IsNullOrEmpty(value))
         {
-            Debug.LogError("Player Name is null or empty");
-            return;
+            userClass["friendlyName"] = value;
+            userClass["userID"] = userID;
+
+            userClass.SaveAsync();
         }
-        PhotonNetwork.NickName = value;
-
-
-        PlayerPrefs.SetString(playerNamePrefKey, value);
     }
     #endregion
 }
