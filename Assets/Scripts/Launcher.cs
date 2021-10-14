@@ -8,6 +8,7 @@ using System;
 using NCMB;
 using SFB;
 using System.IO;
+using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -88,8 +89,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void Settings(bool isActive)
     {
-        if (isActive) settingsPanel.SetActive(true);
-        else settingsPanel.SetActive(false);
+        settingsPanel.SetActive(isActive);
     }
 
     public void UploadIcon()
@@ -176,7 +176,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("ロビーに入りました。");
-        label.SetActive(false);
+
+        if (PlayerPrefs.HasKey("userID"))
+        {
+            string userID = PlayerPrefs.GetString("userID");
+            label.GetComponent<Text>().text = string.Format("userID:\n{0}", userID);
+        }
     }
 
     public override void OnJoinedRoom()

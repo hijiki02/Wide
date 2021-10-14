@@ -27,22 +27,18 @@ public class PlayerNameInputField : MonoBehaviour
             query.FindAsync((List<NCMBObject> objList, NCMBException e) => {
                 if (e == null)
                 {
-                    foreach (NCMBObject obj in objList)
-                    {
-                        Debug.Log("objectId:" + obj.ObjectId);
-                        userClass.ObjectId = obj.ObjectId;
-                    }
+                    Debug.Log("objectId:" + objList[0].ObjectId);
+                    userClass.ObjectId = objList[0].ObjectId;
 
-                    userClass.FetchAsync();
+                    userClass.FetchAsync((NCMBException e) => {
+                        if (e == null)
+                        {
+                            InputField inputField = GetComponent<InputField>();
+                            inputField.text = (string)userClass["friendlyName"];
+                        }
+                    });
                 }
             });
-
-            InputField inputField = this.GetComponent<InputField>();
-
-            if (inputField != null)
-            {
-                inputField.text = (string)userClass["friendlyName"];
-            }
         }
     }
     #endregion
