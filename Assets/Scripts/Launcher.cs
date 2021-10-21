@@ -50,8 +50,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         progressLabel.SetActive(false);
         controlPanel.SetActive(true);
 
-        InitPlayerID();
-
         if (!WholeSettings.isConnectedToPhotonNetwork)
         {
             SetMicrophoneDevice();
@@ -119,17 +117,13 @@ public class Launcher : MonoBehaviourPunCallbacks
     #region 関数
     private void InitPlayerID()
     {
-        if (string.IsNullOrEmpty(PlayerPrefs.GetString("userID")))
-        {
-            NCMBObject userClass = new NCMBObject("Users");
-            string guid = Guid.NewGuid().ToString();
+        NCMBObject userClass = new NCMBObject("Users");
+        string guid = Guid.NewGuid().ToString();
 
-            PlayerPrefs.SetString("userID", guid);
-            PhotonNetwork.NickName = guid;
-            userClass["userID"] = guid;
+        PlayerPrefs.SetString("userID", guid);
+        userClass["userID"] = guid;
 
-            userClass.SaveAsync();
-        }
+        userClass.SaveAsync();
     }
 
     private void SetMicrophoneDevice()
@@ -181,6 +175,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             string userID = PlayerPrefs.GetString("userID");
             label.GetComponent<Text>().text = string.Format("userID:\n{0}", userID);
+        } else
+        {
+            InitPlayerID();
         }
     }
 

@@ -15,11 +15,11 @@ public class NamePlateScript : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
+            photonView.Owner.NickName = PlayerPrefs.GetString("userID");
             gameObject.SetActive(false);
         }
         else
         {
-            // FIXME: ニックネームが取得できない
             userID = photonView.Owner.NickName;
             userClass = new NCMBObject("Users");
 
@@ -38,7 +38,8 @@ public class NamePlateScript : MonoBehaviourPunCallbacks
                         userClass.FetchAsync((NCMBException e) => {
                             if (e == null)
                             {
-                                GetComponent<TextMesh>().text = (string)userClass["friendlyName"];
+                                string friendlyName = (string)userClass["friendlyName"];
+                                GetComponent<TextMesh>().text = friendlyName;
                             }
                         });
                     }
