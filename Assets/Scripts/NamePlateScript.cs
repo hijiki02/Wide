@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using NCMB;
+using UnityEngine.UI;
 
 public class NamePlateScript : MonoBehaviourPunCallbacks
 {
@@ -47,6 +48,5 @@ public class NamePlateScript : MonoBehaviourPunCallbacks
                 }
             });
         }
-
     }
 }
