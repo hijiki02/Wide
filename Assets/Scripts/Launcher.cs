@@ -4,6 +4,11 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Photon.Voice.Unity;
+using System;
+using NCMB;
+using SFB;
+using System.IO;
+using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -82,8 +87,21 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void Settings(bool isActive)
     {
-        if (isActive) settingsPanel.SetActive(true);
-        else settingsPanel.SetActive(false);
+        settingsPanel.SetActive(isActive);
+    }
+
+    public void UploadIcon()
+    {
+        ExtensionFilter[] extensions = new ExtensionFilter[] {
+            new ExtensionFilter("Image Files", "png", "jpg", "jpeg" ),
+            new ExtensionFilter("All Files", "*" ),
+        };
+
+        string path = StandaloneFileBrowser.OpenFilePanel("Open File", "", extensions, true)[0];
+        byte[] imageByte = File.ReadAllBytes(path);
+
+        NCMBFile file = new NCMBFile(PlayerPrefs.GetString("userID"), imageByte);
+        file.SaveAsync();
     }
 
     public void Exit()
@@ -97,6 +115,17 @@ public class Launcher : MonoBehaviourPunCallbacks
     #endregion
 
     #region 関数
+    private void InitPlayerID()
+    {
+        NCMBObject userClass = new NCMBObject("Users");
+        string guid = Guid.NewGuid().ToString();
+
+        PlayerPrefs.SetString("userID", guid);
+        userClass["userID"] = guid;
+
+        userClass.SaveAsync();
+    }
+
     private void SetMicrophoneDevice()
     {
         Debug.Log("マイクの取得を開始します。");
@@ -141,7 +170,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("ロビーに入りました。");
-        label.SetActive(false);
+
+        if (PlayerPrefs.HasKey("userID"))
+        {
+            string userID = PlayerPrefs.GetString("userID");
+            label.GetComponent<Text>().text = string.Format("userID:\n{0}", userID);
+        } else
+        {
+            InitPlayerID();
+        }
     }
 
     public override void OnJoinedRoom()

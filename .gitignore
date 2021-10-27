@@ -71,13 +71,15 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Assets
-/[Aa]ssets/[Ff]ree/*
-/[Aa]ssets/[Pp]lugins/*
-/[Aa]ssets/[Pp]hoton/*
-
-/[Aa]ssets/[Ff]ree.meta
-/[Aa]ssets/[Pp]lugins.meta
-/[Aa]ssets/[Pp]hoton.meta
+/[Aa]ssets/[Ff]ree*
+/[Aa]ssets/[Pp]lugins*
+/[Aa]ssets/[Pp]hoton*
+/[Aa]ssets/NCMB*
+/[Aa]ssets/[Pp]refabs/NCMB*
+/[Aa]ssets/[Pp]refabs/Member*
+/[Aa]ssets/[Ss]cenes/Member*
+/[Aa]ssets/[Ss]cenes/QuickStartScene*
+/[Aa]ssets/StandaloneFileBrowser*
 
 #########
 # macOS #
