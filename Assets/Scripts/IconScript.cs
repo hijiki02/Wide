@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using NCMB;
-using UnityEngine.UI;
 
-public class VideoPlateScript : MonoBehaviourPunCallbacks
+public class IconScript : MonoBehaviourPunCallbacks
 {
     #region 変数
     private string userID;
@@ -27,8 +26,8 @@ public class VideoPlateScript : MonoBehaviourPunCallbacks
 
                 Rect rect = new Rect(0f, 0f, texture.width, texture.height);
 
-                Image image = GetComponent<Image>();
-                image.sprite = Sprite.Create(texture, rect, new Vector2(0.5f, 0.5f));
+                SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+                spriteRenderer.sprite = Sprite.Create(texture, rect, new Vector2(0.5f, 0.5f));
             }
         });
     }
