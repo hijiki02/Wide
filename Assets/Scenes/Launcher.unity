@@ -738,6 +738,7 @@ RectTransform:
   - {fileID: 1829320682}
   - {fileID: 1934440735}
   - {fileID: 1083925422}
+  - {fileID: 1059164485}
   m_Father: {fileID: 517146899}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -905,7 +906,6 @@ RectTransform:
   - {fileID: 465991437}
   - {fileID: 2049920747}
   - {fileID: 211201490}
-  - {fileID: 1059164485}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1851,17 +1851,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059164484}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 517146899}
-  m_RootOrder: 3
+  m_Father: {fileID: 465991437}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 154.5, y: 30}
-  m_SizeDelta: {x: 279, y: 30}
+  m_AnchoredPosition: {x: -165.49997, y: -79.99998}
+  m_SizeDelta: {x: 279, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1059164486
 MonoBehaviour:
@@ -1876,7 +1876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.2509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2418,7 +2418,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1399255194}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1129568055}
+        m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
+        m_MethodName: UploadIcon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1399255194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3221,7 +3233,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1836928918}
         m_TargetAssemblyTypeName: PlayerNameInputField, Assembly-CSharp
-        m_MethodName: SetPlayerName
+        m_MethodName: SetFriendlyName
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

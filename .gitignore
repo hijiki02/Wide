@@ -79,6 +79,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Pp]refabs/Member*
 /[Aa]ssets/[Ss]cenes/Member*
 /[Aa]ssets/[Ss]cenes/QuickStartScene*
+/[Aa]ssets/StandaloneFileBrowser*
 
 #########
 # macOS #
