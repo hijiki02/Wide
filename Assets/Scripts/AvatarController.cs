@@ -47,7 +47,7 @@ public class AvatarController : MonoBehaviourPunCallbacks
             h = CrossPlatformInputManager.GetAxisRaw("Horizontal");
             v = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
-            rb.velocity = v * speed * transform.forward;
+            rb.velocity = -v * speed * transform.forward;
             transform.rotation *= Quaternion.AngleAxis(movingTurnSpeed * h * Time.deltaTime, Vector3.up);
         }
     }
